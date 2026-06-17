@@ -47,3 +47,35 @@ SMTP_FROM="RK SOLAR Website <your-smtp-username>"
 
 The form posts to `/api/contact`, validates all fields, and sends the lead details to
 `rksolar@gmail.com`.
+
+## Deploying to Vercel
+
+This repository is a Next.js app at the repository root. In Vercel, use these settings:
+
+- Framework Preset: `Next.js`
+- Root Directory: `.`
+- Install Command: `npm ci`
+- Build Command: `npm run build`
+- Output Directory: leave empty / Vercel default
+
+Required environment variables for the contact form:
+
+- `SMTP_HOST`
+- `SMTP_PORT`
+- `SMTP_SECURE`
+- `SMTP_USER`
+- `SMTP_PASS`
+- `SMTP_FROM`
+
+### Fixing `404: NOT_FOUND` on Vercel
+
+If Vercel shows `404: NOT_FOUND`, check these first:
+
+1. Make sure Vercel is deploying the branch that contains the app files (`app/`, `package.json`,
+   `next.config.ts`). The current app exists on the `cursor/rk-solar-landing-page-0209` branch
+   until it is merged to `main`.
+2. In Vercel Project Settings, confirm Root Directory is the repository root (`.`), not a nested
+   folder.
+3. Do not set a custom Output Directory such as `dist`, `out`, or `.next`; leave it as the Vercel
+   default for Next.js.
+4. Redeploy after changing the Git branch or project settings.
